@@ -10,13 +10,14 @@
 require_once dirname( __FILE__, 2 ) . '/vendor/wp-phpunit/wp-phpunit/includes/factory.php';
 
 \Mantle\Testing\manager()
-	->maybe_rsync_plugin( 'buddypress' )
-	->maybe_rsync_plugin( 'wp-graphql' )
 	->before( function() {
 		require_once dirname( __FILE__ ) . '/includes/define-constants.php';
 	})
 	->loaded(
 		function() {
+			define( 'WP_TESTS_CONFIG_FILE_PATH', ABSPATH . '/wp-tests-config.php' );
+			define( 'WP_TESTS_CONFIG_PATH', ABSPATH . '/wp-tests-config.php' );
+
 			// Load plugins.
 			require_once BP_TESTS_DIR . '/includes/loader.php';
 			require_once dirname( __FILE__, 3 ) . '/wp-graphql/wp-graphql.php';
